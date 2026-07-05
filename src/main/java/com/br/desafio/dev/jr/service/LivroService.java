@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.br.desafio.dev.jr.model.Livro;
 import com.br.desafio.dev.jr.repository.LivroRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class LivroService {
 
@@ -41,7 +43,11 @@ public class LivroService {
 	}
 	
 	public void deletarLivro(Long id) {
-		livroRepository.deleteById(id);
+		
+		Livro livro = livroRepository.findById(id)
+		        .orElseThrow(() -> new EntityNotFoundException("Não foi possível excluir. Livro não encontrado com o ID: " + id));
+		
+		livroRepository.delete(livro);
 	}
 	
 }

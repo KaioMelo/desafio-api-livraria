@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.br.desafio.dev.jr.model.Livro;
 import com.br.desafio.dev.jr.service.LivroService;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @RestController
 @RequestMapping("/api/livros")
 public class LivroController {
@@ -47,7 +49,7 @@ public class LivroController {
 		
 		return livroService.buscarLivro(id)
 	            .map(livro -> ResponseEntity.ok(livro))
-	            .orElseGet(() -> ResponseEntity.notFound().build());
+	            .orElseThrow(() -> new EntityNotFoundException("Livro não encontrado com o ID: " + id));
 	}
 	
 	@PutMapping("/{id}")
@@ -55,7 +57,7 @@ public class LivroController {
 		
 		return livroService.alterarLivro(id, livro)
 	            .map(livroSalvo -> ResponseEntity.ok(livroSalvo))
-	            .orElse(ResponseEntity.notFound().build());
+	            .orElseThrow(() -> new EntityNotFoundException("Livro não encontrado com o ID: " + id));
 	}
 	
 	@DeleteMapping(value = "/{id}")
