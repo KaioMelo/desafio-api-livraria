@@ -20,7 +20,7 @@
         <img src="https://img.shields.io/badge/Maven-v4.0.0-darkblue.svg" />
     </a>
     <a alt="Banco H2">
-        <img src="https://img.shields.io/badge/Banco H2-v0.12.6-blue.svg" />
+        <img src="https://img.shields.io/badge/Banco H2-v2.3.x-blue.svg" />
     </a>
 </p>
 
